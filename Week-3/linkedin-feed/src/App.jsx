@@ -1,6 +1,17 @@
 import { useState } from "react";
 import profile from "./assets/profile.png";
 import mainImg from "./assets/mainImg.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faThumbsUp,
+  faComment,
+  faShareFromSquare,
+  faShareSquare,
+  faSave,
+  faMessage,
+  faFileText,
+} from "@fortawesome/free-regular-svg-icons";
+import { faEarth } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [details, setDetails] = useState([
@@ -51,7 +62,11 @@ function App() {
         alignItems: "center",
       }}
     >
-      <button onClick={onClickHandler}>Add more todo</button>
+      <button onClick={onClickHandler}style={{
+      position: "sticky",
+      top: 10,
+      zIndex: 1000,
+    }} >Click to Add posts</button>
 
       {details.map(function (det) {
         return (
@@ -80,11 +95,11 @@ function App() {
       <div
         className="container"
         style={{
-          border: "2px solid white",
-          borderRadius: "5px",
-          padding: "10px",
+          borderRadius: "10px",
+          padding: "20px",
           margin: "10px",
           width: "25rem",
+          backgroundColor: "#242424",
         }}
       >
         {/* Header */}
@@ -101,6 +116,7 @@ function App() {
             className="profileImg"
             src={props.profileImg}
             style={{
+              border: "3px solid lightgreen",
               height: "3rem",
               width: "3rem",
               borderRadius: "50%",
@@ -120,10 +136,20 @@ function App() {
               {props.profileName}
             </div>
             <div className="bio">{props.bio}</div>
-            <div className="hrsAgoPost">{props.hrsAgoPost}</div>
+            <div className="hrsAgoPost" style={{display:"flex", gap: "4px" }}>
+              <div>{props.hrsAgoPost}</div>
+              <div>
+                <FontAwesomeIcon icon={faEarth} />
+              </div>
+            </div>
           </div>
 
-          <div className="caption" style={{gridColumn:"1/4", fontSize:"11px", fontWeight:"bold"}}>{props.caption}</div>
+          <div
+            className="caption"
+            style={{ gridColumn: "1/4", fontSize: "11px", fontWeight: "bold" }}
+          >
+            {props.caption}
+          </div>
         </div>
         {/* body */}
         <div
@@ -139,10 +165,13 @@ function App() {
             src={props.mainImg}
             alt="mainImage"
             style={{
+              border: "1px solid darkgrey",
               width: "100%",
               maxHeight: "50vh",
               objectFit: "contain",
               objectPosition: "center",
+              borderRadius: "10px",
+              margin: "15px 0",
             }}
           />
           <div
@@ -153,10 +182,13 @@ function App() {
               fontSize: "11px",
             }}
           >
-            <div className="likesCount" style={{}}>
+            <div className="likesCount" style={{ padding: "10px 0" }}>
               {props.likeCounts}
             </div>
-            <div className="right" style={{ display: "flex", gap: "10px" }}>
+            <div
+              className="right"
+              style={{ display: "flex", gap: "10px", padding: "10px 0" }}
+            >
               <div className="commentCount" style={{}}>
                 {props.commentCount}
               </div>
@@ -170,12 +202,24 @@ function App() {
         {/* footer */}
         <div
           className="footer"
-          style={{ display: "flex", justifyContent: "space-between", padding:"10px 0" }}
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "10px 0",
+          }}
         >
-          <div className="logoLike">{props.logoLike}</div>
-          <div className="logoComment">{props.logoComment}</div>
-          <div className="logoRepost">{props.rePosts}</div>
-          <div className="logoShare">{props.logoShare}</div>
+          <div className="like">
+            <FontAwesomeIcon icon={faThumbsUp} /> Like
+          </div>
+          <div className="comment">
+            <FontAwesomeIcon icon={faComment} /> Comment
+          </div>
+          <div className="share">
+            <FontAwesomeIcon icon={faShareFromSquare} /> share
+          </div>
+          <div className="save">
+            <FontAwesomeIcon icon={faSave} /> Save
+          </div>
         </div>
       </div>
     );
